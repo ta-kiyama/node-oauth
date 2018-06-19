@@ -14,7 +14,7 @@ Also provides rudimentary OAuth2 support, tested against facebook, github, fours
 Installation
 ============== 
 
-    $ npm install oauth
+    $ npm install @ta-kiyama/oauth
 
 
 Examples
@@ -74,6 +74,34 @@ describe('OAuth2',function(){
        done();
      });
    });
+```
+
+## Using Promise
+```javascript
+
+describe('OAuth1.0',() => {
+  var OAuth = require('oauth');
+
+  it('tests trends Twitter API v1.1', async (done) => {
+    const oauth = new OAuth.OAuth(
+      'https://api.twitter.com/oauth/request_token',
+      'https://api.twitter.com/oauth/access_token',
+      'your application consumer key',
+      'your application secret',
+      '1.0A',
+      null,
+      'HMAC-SHA1'
+    );
+
+    const [data, res] = await oauth.getAsync(
+      'https://api.twitter.com/1.1/trends/place.json?id=23424977',
+      'your user token for this app', //test user token
+      'your user secret for this app', //test user secret            
+    );
+
+    dosomething();
+  });
+});
 ```
 
 Change History
